@@ -1,69 +1,62 @@
 import React from 'react';
-import axios from 'axios';
-import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-const Facts_Births = () => {
+const Facts_Births = (props) => {
   return (
-    <SafeAreaView style={styles.container}>
-      
-      <View style={styles.cardContainer}>
-        {/* image */}
-        <Image
-          source={{
-            uri:
-              "https://cdn.britannica.com/73/121673-050-4FE5679B/Genghis-Khan-ink-colour-silk-Taipei-Taiwan.jpg",
-          }}
-          style={styles.image}
-        />
-
-        <View style={styles.textContainer}>
-          {/* date */}
-          <Text style={styles.date}>1162</Text>
-
-          {/* description */}
-          <Text style={styles.description}>Chinggis Khan</Text>
-        </View>
+    <TouchableOpacity>
+      <View style={styles.container}>
+      {props.image && (
+        <Image source={{ uri: props.urlToImage }} style={styles.image} />
+      )}
+      <View style={styles.textContainer}>
+        {props.year && <Text style={styles.year}>{props.year}</Text>}
+        <Text style={styles.description}>{props.description}</Text>
       </View>
-    </SafeAreaView>
+    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
-    alignSelf: "center",
+    width: '90%',
+    alignSelf: 'center',
     borderRadius: 20,
     shadowOpacity: 0.5,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       height: 5,
       width: 5,
     },
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     marginBottom: 20,
   },
   cardContainer: {
     borderRadius: 20,
-    //overflow: "hidden",
   },
   image: {
     height: 200,
-    width: "100%",
+    width: '100%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
   textContainer: {
     padding: 10,
   },
+  year: {
+    fontSize: 25,
+    fontWeight: '600',
+  },
   date: {
-    fontSize: 18,
-    fontWeight: "600",
+    fontSize: 50,
+    fontWeight: '600',
     marginTop: 1,
   },
   description: {
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: '300',
     marginTop: 5,
   },
 });

@@ -13,12 +13,10 @@ const HomeScreen = () => {
     const day = today.getDate().toString().padStart(2, '0');
 
     try {
-      const response = await axios.get(
-        `https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/${month}/${day}`
-      );
+      const response = await axios.get('https://history.muffinlabs.com/date');
       const data = response.data;
-      if (data.events) {
-        setEvents(data.events);
+      if (data.data && data.data.Events) {
+        setEvents(data.data.Events);
       }
     } catch (error) {
       console.log(error);

@@ -1,6 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, ImageBackground, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { AntDesign } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons'; 
+
 
 
 //Screens
@@ -16,31 +20,26 @@ const Tabs = () => {
     return(
         <Tab.Navigator
         screenOptions={{
+            tabBarActiveTintColor: "red",
             headerShown: false,
             tabBarShowLabel : false,
             tabBarStyle: {
-                backgroundColor: 'white', 
+                backgroundColor: '#f5ebe0', 
                 position: 'absolute',
                 marginHorizontal: 0,
-                height: 80,
+                height: 90,
                 borderRadius: 30,
             }
         }}
         >
             
             <Tab.Screen 
-                name="What Happened Today" 
+                name="Home" 
                 component={HomeScreen} 
                 options={{
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: () => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                            <ImageBackground
-                    source={require('../assets/icons/home.png')}
-                    resizeMode="contain"
-                    style={{width: 30, height: 30, tintColor: focused ? '#e32f45' : '#748c94'}}
-                >
-                    
-                </ImageBackground>
+                            <AntDesign name="home" size={27} color="black" />
                         </View>
                     ),
                 }}
@@ -50,15 +49,9 @@ const Tabs = () => {
                 name="Births" 
                 component={BirthsScreen} 
                 options={{
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: () => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                            <ImageBackground
-                    source={require('../assets/icons/births.png')}
-                    resizeMode="contain"
-                    style={{width: 30, height: 30, tintColor: focused ? '#e32f45' : '#748c94'}}
-                >
-                    
-                </ImageBackground>
+                            <AntDesign name="calendar" size={27} color="black" />
                         </View>
                     ),
                 }} 
@@ -69,15 +62,9 @@ const Tabs = () => {
                 name="Deaths" 
                 component={DeathsScreen} 
                 options={{
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: () => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                            <ImageBackground
-                    source={require('../assets/icons/deaths.png')}
-                    resizeMode="contain"
-                    style={{width: 30, height: 30, tintColor: focused ? '#e32f45' : '#748c94'}}
-                >
-                    
-                </ImageBackground>
+                            <Ionicons name="skull-outline" size={27} color="black" />
                         </View>
                     ),
                 }}
@@ -87,15 +74,9 @@ const Tabs = () => {
                 name="Settings" 
                 component={SettingsScreen} 
                 options={{
-                    tabBarIcon: ({focused}) => (
+                    tabBarIcon: () => (
                         <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                            <ImageBackground
-                    source={require('../assets/icons/settings.png')}
-                    resizeMode="contain"
-                    style={{width: 30, height: 30, tintColor: focused ? '#e32f45' : '#748c94'}}
-                >
-                    
-                </ImageBackground>
+                            <Feather name="settings" size={27} color="black" />
                         </View>
                     ),
                 }}
