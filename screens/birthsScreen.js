@@ -11,12 +11,27 @@ const BirthsScreen = () => {
   const getBirths = async () => {
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const day = today.getDate().toString().padStart(2, '0');
-
+  
     try {
-      const response = await axios.get('https://history.muffinlabs.com/date');
+      const response = await axios.get(`https://history.muffinlabs.com/date`);
       const data = response.data;
       if (data.data && data.data.Births) {
-        setEvents(data.data.Births);
+        const updatedBirths = await Promise.all(
+          data.data.Births.map(async (birth) => {
+            const birthResponse = await axios.get(birth.links[0].link);
+            const eventHtml = birthResponse.data;
+            const regex = /<meta property="og:image" content="(.*?)">/;
+            const matches = regex.exec(eventHtml);
+            if (matches && matches[1]) {
+              return {
+                ...birth,
+                image: matches[1],
+              };
+            }
+            return birth;
+          })
+        );
+        setEvents(updatedBirths);
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +54,7 @@ const BirthsScreen = () => {
             data={events}
             renderItem={({ item }) => (
               <Facts_Births
-                image={item.thumbnail?.source}
+              image={item.image}
                 year={item.year}
                 description={item.text}
               />

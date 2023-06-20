@@ -11,12 +11,27 @@ const DeathsScreen = () => {
   const getDeaths = async () => {
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const day = today.getDate().toString().padStart(2, '0');
-
+  
     try {
-      const response = await axios.get('https://history.muffinlabs.com/date');
+      const response = await axios.get(`https://history.muffinlabs.com/date`);
       const data = response.data;
       if (data.data && data.data.Deaths) {
-        setEvents(data.data.Deaths);
+        const updatedDeaths = await Promise.all(
+          data.data.Deaths.map(async (death) => {
+            const deathResponse = await axios.get(death.links[0].link);
+            const eventHtml = deathResponse.data;
+            const regex = /<meta property="og:image" content="(.*?)">/;
+            const matches = regex.exec(eventHtml);
+            if (matches && matches[1]) {
+              return {
+                ...death,
+                image: matches[1],
+              };
+            }
+            return death;
+          })
+        );
+        setEvents(updatedDeaths);
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +54,7 @@ const DeathsScreen = () => {
             data={events}
             renderItem={({ item }) => (
               <Facts_Deaths
-                image={item.thumbnail?.source}
+                image={item.image}
                 year={item.year}
                 description={item.text}
               />

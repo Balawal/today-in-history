@@ -28,7 +28,7 @@ const Tabs = () => {
                 position: 'absolute',
                 marginHorizontal: 0,
                 height: 90,
-                borderRadius: 30,
+                borderRadius: 40,
             }
         }}
         >

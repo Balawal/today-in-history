@@ -11,12 +11,27 @@ const HomeScreen = () => {
   const getEvents = async () => {
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const day = today.getDate().toString().padStart(2, '0');
-
+  
     try {
-      const response = await axios.get('https://history.muffinlabs.com/date');
+      const response = await axios.get(`https://history.muffinlabs.com/date`);
       const data = response.data;
       if (data.data && data.data.Events) {
-        setEvents(data.data.Events);
+        const updatedEvents = await Promise.all(
+          data.data.Events.map(async (event) => {
+            const eventResponse = await axios.get(event.links[0].link);
+            const eventHtml = eventResponse.data;
+            const regex = /<meta property="og:image" content="(.*?)">/;
+            const matches = regex.exec(eventHtml);
+            if (matches && matches[1]) {
+              return {
+                ...event,
+                image: matches[1],
+              };
+            }
+            return event;
+          })
+        );
+        setEvents(updatedEvents);
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +54,7 @@ const HomeScreen = () => {
             data={events}
             renderItem={({ item }) => (
               <Facts
-                image={item.thumbnail?.source}
+                image={item.image}
                 year={item.year}
                 description={item.text}
               />

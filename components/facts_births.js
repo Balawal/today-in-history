@@ -8,7 +8,7 @@ const Facts_Births = (props) => {
     <TouchableOpacity>
       <View style={styles.container}>
       {props.image && (
-        <Image source={{ uri: props.urlToImage }} style={styles.image} />
+        <Image source={{ uri: props.image }} style={styles.image} />
       )}
       <View style={styles.textContainer}>
         {props.year && <Text style={styles.year}>{props.year}</Text>}

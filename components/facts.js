@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import EventDetailScreen from '../screens/eventdetailScreen';
-import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -10,7 +8,7 @@ const Facts = (props) => {
     <TouchableOpacity>
       <View style={styles.container}>
       {props.image && (
-        <Image source={{ uri: props.urlToImage }} style={styles.image} />
+        <Image source={{ uri: props.image }} style={styles.image} />
       )}
       <View style={styles.textContainer}>
         {props.year && <Text style={styles.year}>{props.year}</Text>}
