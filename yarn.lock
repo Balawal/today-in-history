@@ -4517,6 +4517,11 @@
   "resolved" "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   "version" "1.2.4"
 
+"localized-strings@^0.2.0":
+  "integrity" "sha512-TKDhqFPkIIN/if2FSvVVZTaM/GP9TzfgdQ2uY65mr32xgFu5nqkKXprXbzy5rfx32DF5LDvS/y1UqYF/mAscYA=="
+  "resolved" "https://registry.npmjs.org/localized-strings/-/localized-strings-0.2.4.tgz"
+  "version" "0.2.4"
+
 "locate-path@^3.0.0":
   "integrity" "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A=="
   "resolved" "https://registry.npmjs.org/locate-path/-/locate-path-3.0.0.tgz"
@@ -5756,6 +5761,13 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
 
+"react-localization@^1.0.17":
+  "integrity" "sha512-f4E6T8xRis19K8qMOnnhjGV2quy1YH2lrSsnAiytvgt7uOSp6WgDhrZH6XZEaEFqupTOCFSf8uagIoIAkjl4JA=="
+  "resolved" "https://registry.npmjs.org/react-localization/-/react-localization-1.0.19.tgz"
+  "version" "1.0.19"
+  dependencies:
+    "localized-strings" "^0.2.0"
+
 "react-native-cheerio@^1.0.0-rc.4":
   "integrity" "sha512-V2nAoxikHGV1vl2nKL2rlw832Ze+p8op5p6MDltd5ZrEZGp1+eTl+qjC+l4TY9ju3CNpt/uiNuOEQoWqgdwzUQ=="
   "resolved" "https://registry.npmjs.org/react-native-cheerio/-/react-native-cheerio-1.0.0-rc.4.tgz"
@@ -5800,6 +5812,13 @@
   "resolved" "https://registry.npmjs.org/react-native-html-parser/-/react-native-html-parser-0.1.0.tgz"
   "version" "0.1.0"
 
+"react-native-localization@^2.3.1":
+  "integrity" "sha512-jmD6GEAGmstCIZOsxZcxWJbbx364c9qtKy8kefLcHYfAc73+g+e8CB7TZEwpK4IZNXxCBAeQMBsXfFrTyJmpWQ=="
+  "resolved" "https://registry.npmjs.org/react-native-localization/-/react-native-localization-2.3.1.tgz"
+  "version" "2.3.1"
+  dependencies:
+    "react-localization" "^1.0.17"
+
 "react-native-parse-html@^2.2.6":
   "integrity" "sha512-NGb4krr8uc9yuumsMB88w3Cf2Ud5QkOJoGibmh7zt5XPNPgmA0L7GLbogLcPy7F5hHT0L7vsuNg4mzrAVh02Og=="
   "resolved" "https://registry.npmjs.org/react-native-parse-html/-/react-native-parse-html-2.2.6.tgz"
@@ -5841,7 +5860,7 @@
     "base64-js" "^1.2.0"
     "ieee754" "^1.1.8"
 
-"react-native@*", "react-native@^0.71.8", "react-native@>=0.57":
+"react-native@*", "react-native@^0.71.8", "react-native@>=0.57", "react-native@>0.64":
   "integrity" "sha512-ftMAuhpgTkbHU9brrqsEyxcNrpYvXKeATY+if22Nfhhg1zW+6wn95w9otwTnA3xHkljPCbng8mUhmmERjGEl7g=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.71.8.tgz"
   "version" "0.71.8"
@@ -5894,7 +5913,7 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.12.0 || ^17.0.0 || ^18.0.0"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16.0", "react@>=16.8", "react@>=17.0.0", "react@18.2.0":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.0.0 || ^17.0.0 || ^16.0.0 || ^15.6.0", "react@^18.2.0", "react@>=16.0", "react@>=16.8", "react@>=17.0.0", "react@>15.6.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

@@ -2,17 +2,25 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+const defaultImage = 'https://alameda.edu/wp-content/uploads/2021/07/History.png';
 
-const Facts_Births = (props) => {
+const Facts_Births = ({ image, year, description }) => {
+  const renderImage = image ? (
+    <View style={styles.imageContainer}>
+      <Image source={{ uri: image }} style={styles.image} />
+    </View>
+  ) : (
+    <View style={styles.imageContainer}>
+      <Image source={{uri:defaultImage}} style={styles.image} />
+    </View>
+  );
   return (
     <TouchableOpacity>
       <View style={styles.container}>
-      {props.image && (
-        <Image source={{ uri: props.image }} style={styles.image} />
-      )}
+      {renderImage}
       <View style={styles.textContainer}>
-        {props.year && <Text style={styles.year}>{props.year}</Text>}
-        <Text style={styles.description}>{props.description}</Text>
+        <Text style={styles.year}>{year}</Text>
+        <Text style={styles.description} numberOfLines={2}>{description}</Text>
       </View>
     </View>
     </TouchableOpacity>

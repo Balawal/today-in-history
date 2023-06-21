@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, Image, TouchableOpacity, Switch, } from 'react-native'; 
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -25,10 +25,8 @@ const SettingsScreen = () => {
         language: 'English',
         darkMode: true,
       });
-    
       return (
         <SafeAreaView style={{ backgroundColor: '#f6f6f6' }}>
-          <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.header}>
               <Text style={styles.title}>Settings</Text>
             </View>
@@ -49,7 +47,6 @@ const SettingsScreen = () => {
                         ]}>
                         <TouchableOpacity
                           onPress={() => {
-                            // handle onPress
                           }}>
                           <View style={styles.row}>
                             <FeatherIcon
@@ -88,7 +85,7 @@ const SettingsScreen = () => {
                 </View>
               </View>
             ))}
-          </ScrollView>
+          
         </SafeAreaView>
       );
 }
@@ -122,9 +119,10 @@ const styles = StyleSheet.create({
       paddingLeft: 24,
       paddingRight: 24,
       marginBottom: 12,
+      marginTop: 20,
     },
     title: {
-      fontSize: 32,
+      fontSize: 29,
       fontWeight: '700',
       color: '#1d1d1d',
       marginBottom: 6,

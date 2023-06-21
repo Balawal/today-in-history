@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { View, Text, StyleSheet, SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import Facts from '../components/facts';
+import BackToTop from '../navigation/backtotop';
 
 const HomeScreen = () => {
   const [events, setEvents] = useState([]);
   const today = new Date();
   const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
+  const scrollViewRef = useRef();
 
   const getEvents = async () => {
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -39,12 +41,19 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
+    const scrollListener = scrollViewRef.current.addEventListener('scroll', handleScroll);
+    return () => {
+      scrollViewRef.current.removeEventListener('scroll', scrollListener);
+    };
+  }, []);
+
+  useEffect(() => {
     getEvents();
   }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: '#f6f6f6' }}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView ref={scrollViewRef}contentContainerStyle={styles.container}>
           <View style={styles.header}>
               <Text style={styles.title}>Today</Text>
               <View style={styles.spacer} />
@@ -61,6 +70,7 @@ const HomeScreen = () => {
             )}
             keyExtractor={(item, index) => index.toString()}
           />
+          <BackToTop scrollViewRef={scrollViewRef}/>
       </ScrollView>
     </SafeAreaView>
   );
