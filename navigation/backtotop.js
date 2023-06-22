@@ -1,30 +1,29 @@
-import React, { useRef } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
-const BackToTop = ({ scrollViewRef }) => {
-  const scrollToTop = () => {
-    scrollViewRef.current.scrollTo({ y: 0, animated: true });
-  };
-
+const BackToTop = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={scrollToTop}>
-      <Text style={styles.buttonText}>Go Back to Top</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>↑</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
     position: 'absolute',
-    bottom: 20,
-    right: 20,
-    backgroundColor: '#333',
-    borderRadius: 5,
-    padding: 10,
+    bottom: 90,
+    right: 10,
+    backgroundColor: '#000000',
+    borderRadius: 90,
+    padding: 12,
   },
   buttonText: {
-    color: '#fff',
+    color: '#ffffff',
     fontWeight: 'bold',
+    fontSize: 24,
   },
 });
 

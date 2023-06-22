@@ -27,7 +27,7 @@ const Tabs = () => {
                 backgroundColor: '#ffc300', 
                 position: 'absolute',
                 marginHorizontal: 0,
-                height: 90,
+                height: 80,
                 borderRadius: 40,
             }
         }}
