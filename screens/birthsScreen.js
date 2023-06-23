@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, ScrollView, Animated } from 'react-native'; 
+import { View, Text, StyleSheet, SafeAreaView, Animated } from 'react-native'; 
 import Facts_Births from '../components/facts_births';
 import BackToTop from '../navigation/backtotop';
 
@@ -12,8 +12,6 @@ const BirthsScreen = () => {
   const flatListRef = useRef();
 
   const getBirths = async () => {
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate().toString().padStart(2, '0');
   
     try {
       const response = await axios.get(`https://history.muffinlabs.com/date`);
