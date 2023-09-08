@@ -19,7 +19,7 @@ const HomeScreen = () => {
       if (data.data && data.data.Events) {
         const updatedEvents = await Promise.all(
           data.data.Events.map(async (event) => {
-            const eventResponse = await axios.get(event.links[0].link);
+            const eventResponse = await axios.get(event.links?.[0]?.link);
             const eventHtml = eventResponse.data;
             const regex = /<meta property="og:image" content="(.*?)">/;
             const matches = regex.exec(eventHtml);
