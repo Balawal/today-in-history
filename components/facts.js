@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 const defaultImage = 'https://alameda.edu/wp-content/uploads/2021/07/History.png';
 
 const Facts = ({ image, year, description }) => {
+  const [expanded, setExpanded] = useState(false);
+
   const renderImage = image ? (
     <View style={styles.imageContainer}>
       <Image source={{ uri: image }} style={styles.image} />
@@ -14,13 +16,16 @@ const Facts = ({ image, year, description }) => {
       <Image source={{uri:defaultImage}} style={styles.image} />
     </View>
   );
+  const handlePress = () => {
+    setExpanded(!expanded);
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
       {renderImage}
       <View style={styles.textContainer}>
         <Text style={styles.year}>{year}</Text>
-        <Text style={styles.description} numberOfLines={2}>{description}</Text>
+        <Text style={styles.description} numberOfLines={expanded ? undefined : 2}>{description}</Text>
       </View>
     </View>
     </TouchableOpacity>

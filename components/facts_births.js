@@ -1,31 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 const defaultImage = 'https://alameda.edu/wp-content/uploads/2021/07/History.png';
 
 const Facts_Births = ({ image, year, description }) => {
-  const renderImage = image ? (
-    <View style={styles.imageContainer}>
-      <Image source={{ uri: image }} style={styles.image} />
-    </View>
-  ) : (
-    <View style={styles.imageContainer}>
-      <Image source={{uri:defaultImage}} style={styles.image} />
-    </View>
-  );
+  const [expanded, setExpanded] = useState(false);
+
+  const handlePress = () => {
+    setExpanded(!expanded);
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
-      {renderImage}
-      <View style={styles.textContainer}>
-        <Text style={styles.year}>{year}</Text>
-        <Text style={styles.description} numberOfLines={2}>{description}</Text>
+        <ImageComponent image={image} />
+        <View style={styles.textContainer}>
+          <Text style={styles.year}>{year}</Text>
+          <Text style={styles.description} numberOfLines={expanded ? undefined : 2}>{description}</Text>
+        </View>
       </View>
-    </View>
     </TouchableOpacity>
   );
 };
+
+// Memoized Image component
+const ImageComponent = React.memo(({ image }) => {
+  const renderImage = image ? (
+    <Image source={{ uri: image }} style={styles.image} />
+  ) : (
+    <Image source={{ uri: defaultImage }} style={styles.image} />
+  );
+
+  return renderImage;
+});
 
 const styles = StyleSheet.create({
   container: {
