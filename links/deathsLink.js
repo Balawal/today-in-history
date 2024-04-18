@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-const EventsLinkScreen = ({ route }) => {
+const DeathsLinkScreen = ({ route }) => {
   const { url } = route.params;
 
   return (
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventsLinkScreen;
+export default DeathsLinkScreen;

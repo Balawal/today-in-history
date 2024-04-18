@@ -3,6 +3,7 @@ import axios from 'axios';
 import { View, Text, StyleSheet, SafeAreaView, Animated } from 'react-native'; 
 import Facts_Deaths from '../components/facts_deaths';
 import BackToTop from '../navigation/backtotop';
+import { useNavigation } from '@react-navigation/native';
 
 const DeathsScreen = () => {
   const [events, setEvents] = useState([]);
@@ -10,9 +11,9 @@ const DeathsScreen = () => {
   const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
   const scrollY = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef();
+  const navigation = useNavigation();
 
   const getDeaths = async () => {
-  
     try {
       const response = await axios.get(`https://history.muffinlabs.com/date`);
       const data = response.data;
@@ -47,7 +48,6 @@ const DeathsScreen = () => {
     flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
   };
 
-
   return (
     <SafeAreaView style={{ backgroundColor: '#f6f6f6' }}>
       <Animated.FlatList
@@ -66,6 +66,8 @@ const DeathsScreen = () => {
             image={item.image}
             year={item.year}
             description={item.text}
+            link={item.links?.[0]?.link}
+            navigation={navigation}
           />
         )}
         keyExtractor={(item, index) => index.toString()}

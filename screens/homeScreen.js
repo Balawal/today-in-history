@@ -5,8 +5,6 @@ import Facts from '../components/facts';
 import BackToTop from '../navigation/backtotop';
 import { useNavigation } from '@react-navigation/native';
 
-
-
 const HomeScreen = () => {
   const [events, setEvents] = useState([]);
   const today = new Date();
@@ -41,7 +39,6 @@ const HomeScreen = () => {
       console.log(error);
     }
   };
-
 
   useEffect(() => {
     getEvents();
