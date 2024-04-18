@@ -3,6 +3,9 @@ import axios from 'axios';
 import { View, Text, StyleSheet, SafeAreaView, Animated } from 'react-native';
 import Facts from '../components/facts';
 import BackToTop from '../navigation/backtotop';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const HomeScreen = () => {
   const [events, setEvents] = useState([]);
@@ -10,6 +13,7 @@ const HomeScreen = () => {
   const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
   const scrollY = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef();
+  const navigation = useNavigation();
 
   const getEvents = async () => {
     try {
@@ -65,6 +69,8 @@ const HomeScreen = () => {
             image={item.image}
             year={item.year}
             description={item.text}
+            link={item.links?.[0]?.link}
+            navigation={navigation}
           />
         )}
         keyExtractor={(item, index) => index.toString()}

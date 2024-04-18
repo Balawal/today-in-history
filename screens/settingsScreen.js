@@ -1,29 +1,50 @@
-import React, { useState} from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, Switch, Linking } from 'react-native'; 
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, Switch, Linking } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import * as Font from 'expo-font';
+
+// Define your font loading function
+async function loadFonts() {
+  await Font.loadAsync({
+    Feather: require('react-native-vector-icons/Fonts/Feather.ttf'),
+  });
+}
 
 const SECTIONS = [
   {
-      header: 'Preferences',
-      items: [
-        { id: 'language', icon: 'globe', label: 'Language', type: 'select' },
-        { id: 'darkMode', icon: 'moon', label: 'Dark Mode', type: 'toggle' },
-      ],
-    },
-    {
-      header: 'Help',
-      items: [
-        { id: 'bug', icon: 'flag', label: 'Report Bug', type: 'link' },
-        { id: 'contact', icon: 'mail', label: 'Contact Me', type: 'link' },
-      ],
-    },
+    header: 'Preferences',
+    items: [
+      { id: 'language', icon: 'globe', label: 'Language', type: 'select' },
+    ],
+  },
+  {
+    header: 'Help',
+    items: [
+      { id: 'bug', icon: 'flag', label: 'Report Bug', type: 'link' },
+      { id: 'contact', icon: 'mail', label: 'Contact Me', type: 'link' },
+    ],
+  },
 ];
 
 const SettingsScreen = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false); // State to track font loading
   const [form, setForm] = useState({
     language: 'English', // Initialize language label based on current language
     darkMode: true,
   });
+
+  useEffect(() => {
+    async function loadAsync() {
+      await loadFonts(); // Load fonts asynchronously
+      setFontsLoaded(true); // Set the flag to indicate fonts are loaded
+    }
+    loadAsync();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <LoadingIndicator />; // Render a loading indicator while fonts are being loaded
+  }
+
   return (
     <SafeAreaView style={{ backgroundColor: '#f6f6f6' }}>
       <View style={styles.header}>
@@ -44,45 +65,33 @@ const SettingsScreen = () => {
                     styles.rowWrapper,
                     index === 0 && { borderTopWidth: 0 },
                   ]}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (id === 'bug') {
-                        Linking.openURL('mailto:bchaudry818@gmail.com?subject=Bug%20Report');
-                      } else if (id === 'contact') {
-                        Linking.openURL('mailto:bchaudry818@gmail.com?subject=Contact%20You');
-                      } 
-                    }}>
-                    <View style={styles.row}>
+                    <TouchableOpacity
+                      style={styles.row}
+                      onPress={() => {
+                        if (id === 'bug') {
+                          Linking.openURL('mailto:bchaudry818@gmail.com?subject=Bug%20Report');
+                        } else if (id === 'contact') {
+                          Linking.openURL('mailto:bchaudry818@gmail.com?subject=Contact%20You');
+                        }
+                      }}>
                       <FeatherIcon
                         color="#616161"
                         name={icon}
                         style={styles.rowIcon}
                         size={22}
                       />
-
-                      <Text style={styles.rowLabel}>{label}</Text>
-
-                      <View style={styles.rowSpacer} />
-
-                      {type === 'select' && (
-                        <Text style={styles.rowValue}>{form[id]}</Text>
-                      )}
-
-                      {type === 'toggle' && (
-                        <Switch
-                          // Implement dark mode toggle if needed
-                        />
-                      )}
-
-                      {(type === 'select' || type === 'link') && (
-                        <FeatherIcon
-                          color="#ababab"
-                          name="chevron-right"
-                          size={22}
-                        />
-                      )}
-                    </View>
-                  </TouchableOpacity>
+                      <View style={styles.rowContent}>
+                        <Text style={styles.rowLabel}>{label}</Text>
+                        {type === 'select' && (
+                          <Text style={styles.rowValue}>{form[id]}</Text>
+                        )}
+                      </View>
+                      <FeatherIcon
+                        color="#ababab"
+                        name="chevron-right"
+                        size={22}
+                      />
+                    </TouchableOpacity>
                 </View>
               );
             })}
@@ -92,6 +101,12 @@ const SettingsScreen = () => {
     </SafeAreaView>
   );
 }
+
+const LoadingIndicator = () => (
+  <View style={styles.loadingIndicatorContainer}>
+    <Text>Loading...</Text>
+  </View>
+);
 
 export default SettingsScreen;
 
@@ -133,8 +148,22 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: '#e3e3e3',
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+  },
   rowIcon: {
     marginRight: 12,
+  },
+  rowContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: 12,
   },
   rowLabel: {
     fontSize: 17,
@@ -150,5 +179,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+  },
+  loadingIndicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
