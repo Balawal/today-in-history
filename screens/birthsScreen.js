@@ -11,6 +11,7 @@ const BirthsScreen = () => {
   const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
   const scrollY = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef();
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const navigation = useNavigation();
 
   const getBirths = async () => {
@@ -42,6 +43,19 @@ const BirthsScreen = () => {
 
   useEffect(() => {
     getBirths();
+  }, []);
+
+  useEffect(() => {
+    // Add listener to scrollY for scroll event
+    const scrollListener = scrollY.addListener(({ value }) => {
+      // Check if the user has scrolled down
+      setShowBackToTop(value > 0);
+    });
+
+    return () => {
+      // Remove the listener when component unmounts
+      scrollY.removeListener(scrollListener);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -76,7 +90,7 @@ const BirthsScreen = () => {
           { useNativeDriver: true }
         )}
       />
-      {<BackToTop scrollViewRef={flatListRef} onPress={scrollToTop} />}
+      {showBackToTop && <BackToTop onPress={scrollToTop} />}
     </SafeAreaView>
   );
 }
