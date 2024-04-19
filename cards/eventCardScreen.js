@@ -23,7 +23,7 @@ const EventCardScreen = ({ route, navigation }) => {
         {link && (
           <TouchableOpacity onPress={handleLearnMore} style={styles.learnMoreButton}>
             <Feather name="arrow-right" size={20} color="white" style={styles.learnMoreIcon} />
-            <Text style={styles.learnMoreText}>Find out more here</Text>
+            <Text style={styles.learnMoreText}>Find out more</Text>
           </TouchableOpacity>
         )}
       </View>
