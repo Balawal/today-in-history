@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const defaultImage = 'https://alameda.edu/wp-content/uploads/2021/07/History.png';
+const defaultImage = 'https://nathangiglierano.com/images/world%20map2.jpg';
 
 const Facts_Births = ({ image, year, description, link, navigation }) => {
-  const [expanded, setExpanded] = useState(false);
+  
+  const handlePress = () => {
+    navigation.navigate('EventCardScreen', { image, year, description, link});
+  };
 
   const renderImage = image ? (
     <View style={styles.imageContainer}>
@@ -16,29 +19,14 @@ const Facts_Births = ({ image, year, description, link, navigation }) => {
     </View>
   );
 
-  const handlePress = () => {
-    setExpanded(!expanded);
-  };
-
-  const handleLearnMore = () => {
-    if (link) {
-      navigation.navigate('BirthsLinkScreen', { url: link });
-    }
-  };
-
   return (
     <TouchableOpacity onPress={handlePress}>
       <View style={styles.container}>
         {renderImage}
         <View style={styles.textContainer}>
           <Text style={styles.year}>{year}</Text>
-          <Text style={styles.description} numberOfLines={expanded ? undefined : 2}>{description}</Text>
-          {expanded && link && (
-            <TouchableOpacity onPress={handleLearnMore}>
-              <Text style={styles.learnMore}>Learn More</Text>
-            </TouchableOpacity>
-          )}
-        </View>
+        <Text style={styles.description} numberOfLines={2}>{description}</Text>
+      </View>
       </View>
     </TouchableOpacity>
   );
