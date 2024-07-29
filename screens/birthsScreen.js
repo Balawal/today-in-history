@@ -99,20 +99,20 @@ export default BirthsScreen;
 
 const styles = StyleSheet.create({
   header: {
-      paddingLeft: 24,
-      paddingRight: 24,
-      marginBottom: 12,
-      flexDirection: 'row',
-      alignItems: 'center',
+    paddingLeft: 24,
+    paddingRight: 24,
+    marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-    title: {
-      fontSize: 29,
-      fontWeight: '700',
-      color: '#1d1d1d',
-      marginBottom: 6,
+  title: {
+    fontSize: 29,
+    fontWeight: '700',
+    color: '#1d1d1d',
+    marginBottom: 6,
   },
   container: {
-      paddingVertical: 24,
+    paddingVertical: 24,
   },
   spacer: {
     flex: 1,

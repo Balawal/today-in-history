@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { View, Text, StyleSheet, SafeAreaView, Animated } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Animated, TouchableOpacity } from 'react-native';
 import Facts from '../components/facts';
 import BackToTop from '../navigation/backtotop';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = () => {
   const [events, setEvents] = useState([]);
@@ -16,7 +17,7 @@ const HomeScreen = () => {
 
   const getEvents = async () => {
     try {
-      const response = await axios.get(`https://history.muffinlabs.com/date`);
+      const response = await axios.get('https://history.muffinlabs.com/date');
       const data = response.data;
       if (data.data && data.data.Events) {
         const updatedEvents = await Promise.all(
@@ -46,14 +47,11 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    // Add listener to scrollY for scroll event
     const scrollListener = scrollY.addListener(({ value }) => {
-      // Check if the user has scrolled down
       setShowBackToTop(value > 0);
     });
 
     return () => {
-      // Remove the listener when component unmounts
       scrollY.removeListener(scrollListener);
     };
   }, []);
@@ -95,8 +93,6 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
-
 const styles = StyleSheet.create({
   header: {
     paddingLeft: 24,
@@ -117,4 +113,15 @@ const styles = StyleSheet.create({
   spacer: {
     flex: 1,
   },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 80,
+    right: 30,
+    backgroundColor: '#007BFF',
+    borderRadius: 50,
+    padding: 15,
+    elevation: 5,
+  },
 });
+
+export default HomeScreen;

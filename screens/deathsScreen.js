@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { View, Text, StyleSheet, SafeAreaView, Animated } from 'react-native'; 
+import { View, Text, StyleSheet, SafeAreaView, Animated, ActivityIndicator } from 'react-native';  
 import Facts_Deaths from '../components/facts_deaths';
 import BackToTop from '../navigation/backtotop';
 import { useNavigation } from '@react-navigation/native';
@@ -95,26 +95,26 @@ const DeathsScreen = () => {
   );
 }
 
-export default DeathsScreen; 
+export default DeathsScreen;
 
 const styles = StyleSheet.create({
-    header: {
-        paddingLeft: 24,
-        paddingRight: 24,
-        marginBottom: 12,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-      title: {
-        fontSize: 29,
-        fontWeight: '700',
-        color: '#1d1d1d',
-        marginBottom: 6,
-    },
-    container: {
-        paddingVertical: 24,
-    },
-    spacer: {
-      flex: 1,
-    },
+  header: {
+    paddingLeft: 24,
+    paddingRight: 24,
+    marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 29,
+    fontWeight: '700',
+    color: '#1d1d1d',
+    marginBottom: 6,
+  },
+  container: {
+    paddingVertical: 24,
+  },
+  spacer: {
+    flex: 1,
+  },
 });

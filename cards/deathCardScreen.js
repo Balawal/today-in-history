@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const defaultImage = 'https://nathangiglierano.com/images/world%20map2.jpg';
 const windowHeight = Dimensions.get('window').height;
@@ -27,6 +28,12 @@ const DeathCardScreen = ({ route, navigation }) => {
           </TouchableOpacity>
         )}
       </View>
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => navigation.navigate('ChatbotScreen')}
+      >
+        <Ionicons name="chatbubbles-outline" size={30} color="#fff" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -74,6 +81,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#007AFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
   },
 });
 
