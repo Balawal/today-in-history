@@ -7,8 +7,6 @@ const ChatbotScreen = () => {
     const [data, setData] = useState([
         { type: 'bot', text: "Hi, I'm D.I.Z.Z.Z.Z.Y! I'm here to assist you with anything you need.", time: moment().format('h:mm A') }
     ]);
-    const apiKey = '';
-    const apiUrl = 'https://api.openai.com/v1/chat/completions';
     const [textInput, setTextInput] = useState('');
     const flatListRef = useRef(null);
 
